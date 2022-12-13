@@ -7,13 +7,13 @@ const authMiddleware = async (req, res, next) => {
       if (!token) {
         throw new Error('Inexistent token');
       }
-      const decoded = jwt.verify(token, process.env.JWT_KEY)
+      const decoded = await jwt.verify(token, process.env.JWT_KEY)
       const user = await User.findById(decoded.id)
 
       if (token !== user.token) {
         throw new Error('Invalid token');
       }
-      
+
       next();
     } catch (error) {
       res.status(401).send({
