@@ -2,11 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./src/routes');
-const authMiddleware = require('./src/middlewares/auth');
 
 const app = express();
 app.use(express.json());
-app.use('/', authMiddleware, routes);
+app.use(routes);
 
 app.get('/', (req,res) => {
     res.send("OK");
