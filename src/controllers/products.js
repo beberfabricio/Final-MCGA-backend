@@ -20,7 +20,7 @@ const searchProduct = (req, res) => {
 const addProduct = (req, res) => {
     const newProduct = new Product(req.body);
     newProduct.save()
-    .then(data => res.status(201).json({mensaje: "Producto creado", data}))
+    .then(data => res.status(201).json({newProduct}))
     .catch((error) => res.status(500).json({error}));
 }
 
