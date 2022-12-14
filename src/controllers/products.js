@@ -6,17 +6,6 @@ const getProducts = (req, res) => {
     .catch(error => res.status(500).json({mensaje: error}))
 }
 
-const searchProduct = (req, res) => {
-    const nameParam = req.params.name;
-    Product.findOne({name: nameParam})
-    .then(data => {
-        if(!data){
-            return res.status(404).json({mensaje: "Producto no existente"})
-        }
-        return res.status(200).json(data);
-    })
-}
-
 const addProduct = (req, res) => {
     const newProduct = new Product(req.body);
     newProduct.save()
