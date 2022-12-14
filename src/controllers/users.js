@@ -20,16 +20,16 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({email})
     if (!user) {
-        return res.status(404).json({msg: 'Non-existent user'});
+        return res.status(404).json({auth: false, token: null, msg: 'Non-existent user'});
     }
 
     if(!await user.validatePass(password)){
-        return res.status(401).json({auth: false, token: null, msg: 'Invalid password'});
+        return res.status(403).json({auth: false, token: null, msg: 'Invalid password'});
     }
 
     const token = jwt.sign({id: user._id}, process.env.JWT_KEY, {expiresIn: 600})
     const updatedUser = await User.findOneAndUpdate({email},{token},{new: true});
-    return res.status(200).json({auth: true, msg: 'User logged', token})
+    return res.status(200).json({auth: true, token, msg: 'User logged'})
 }
 
 module.exports = { addUser, loginUser };
