@@ -17,7 +17,11 @@ app.get('/', (req,res) => {
 mongoose.connect(process.env.DB_CONNECT)
 .then(
     app.listen(() => {
-        console.log("DB OK");
-        app.listen(process.env.PORT, () => console.log("Server OK"))
+        console.log('DB running');
+        app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`))
     })
+)
+.catch((error) => {
+        res.status(500).json({msg: 'No se pudo conectar con la base de datos', error})
+    }
 )
