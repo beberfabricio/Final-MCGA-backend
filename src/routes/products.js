@@ -4,12 +4,12 @@ const authMiddleware = require('../middlewares/auth');
 
 router.get('/', getProducts)
 
-router.get('/search/:name', authMiddleware, searchProduct)
+router.get('/search/:name', searchProduct)
 
-router.post("/add", authMiddleware, addProduct)
+router.post("/add", addProduct)
 
-router.delete("/delete/:id", authMiddleware, deleteProduct)
+router.delete("/delete/:id", deleteProduct)
 
-router.put("/update/:id", authMiddleware, updateProduct)
+router.put("/update/:id", updateProduct)
 
 module.exports = router;
