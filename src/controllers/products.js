@@ -37,4 +37,4 @@ const updateProduct = (req, res) => {
     .catch(error => res.status(500).json({error}));
 }
 
-module.exports = { getProducts, searchProduct, addProduct, deleteProduct, updateProduct };
+module.exports = { getProducts, addProduct, deleteProduct, updateProduct };
