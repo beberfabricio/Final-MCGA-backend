@@ -27,7 +27,7 @@ const loginUser = async (req, res) => {
         return res.status(403).json({auth: false, token: null, msg: 'Invalid password'});
     }
 
-    const token = jwt.sign({id: user._id}, process.env.JWT_KEY, {expiresIn: 600})
+    const token = jwt.sign({id: user._id}, process.env.JWT_KEY, {expiresIn: '1d'})
     const updatedUser = await User.findOneAndUpdate({email},{token},{new: true});
     return res.status(200).json({auth: true, token, msg: 'User logged'})
 }
