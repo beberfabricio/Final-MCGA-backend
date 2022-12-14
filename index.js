@@ -4,10 +4,8 @@ const mongoose = require('mongoose');
 const routes = require('./src/routes');
 const cors = require('cors')
 
+
 const app = express();
-app.use(express.json());
-app.use(routes);
-app.use(cors());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -17,6 +15,12 @@ app.use(function(req, res, next) {
     );
     next();
   });
+  
+app.use(express.json());
+app.use(routes);
+app.use(cors());
+
+
 
 app.get('/', (req,res) => {
     res.send("OK");
