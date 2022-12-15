@@ -28,8 +28,12 @@ const loginUser = async (req, res) => {
     }
 
     const token = jwt.sign({id: user._id}, process.env.JWT_KEY, {expiresIn: '1d'})
-    const updatedUser = await User.findOneAndUpdate({email},{token},{new: true});
+    await User.findOneAndUpdate({email},{token},{new: true});
     return res.status(200).json({auth: true, token, msg: 'User logged'})
 }
 
-module.exports = { addUser, loginUser };
+const verifyToken = async (req, res) => {
+    return res.status(200).json({msg:'User authorized'});
+}
+
+module.exports = { addUser, loginUser, verifyToken };
